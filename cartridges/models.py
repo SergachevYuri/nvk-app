@@ -12,12 +12,12 @@ class Status(models.TextChoices):
 
 class Cartridge(models.Model):
     class Meta:
-        db_table = "cartriges"
-        verbose_name = "Картриджи"
-        verbose_name_plural = "Картриджи"
+        db_table = "cartridges"
+        verbose_name = "1. Картриджи"
+        verbose_name_plural = "1. Картриджи"
 
 
-    inventory_number = models.CharField(max_length=100, verbose_name="Инвертизационный номер")
+    inventory_number = models.CharField(max_length=100, unique=True, verbose_name="Инвертизационный номер")
     manufacturer = models.CharField(max_length=100, verbose_name="Производитель")
     model = models.CharField(max_length=100, verbose_name="Модель")
     status = models.CharField(max_length=2, choices=Status.choices, default=Status.AWAITING_REFILL, verbose_name="Статус")
@@ -54,8 +54,8 @@ class Cartridge(models.Model):
 class RefillRecord(models.Model):
     class Meta:
         db_table = "refill_record"
-        verbose_name = "Заправка"
-        verbose_name_plural = "Заправка"
+        verbose_name = "2. Заправка"
+        verbose_name_plural = "2. Заправка"
 
     refill_number = models.CharField(max_length=100, unique=True, verbose_name="Номер заправки")
     cartridges = models.ManyToManyField(Cartridge, verbose_name="Картриджи")
@@ -69,8 +69,8 @@ class RefillRecord(models.Model):
 class PrintRecord(models.Model):
     class Meta:
         db_table = "print_record"
-        verbose_name = "Отпечатки"
-        verbose_name_plural = "Отпечатки"
+        verbose_name = "3. Отпечатки"
+        verbose_name_plural = "3. Отпечатки"
 
 
     cartridge = models.ForeignKey(Cartridge, on_delete=models.CASCADE, verbose_name="Картридж")

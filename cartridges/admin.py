@@ -1,8 +1,7 @@
 from django import forms
 from django.db import models
 from django.contrib import admin
-from .models import Cartridge, RefillRecord, PrintRecord
-from .models import Status
+from .models import Cartridge, RefillRecord, PrintRecord, Status
 
 
 class CartridgeAdminForm(forms.ModelForm):
@@ -13,7 +12,7 @@ class CartridgeAdminForm(forms.ModelForm):
         fields = '__all__'
 
 
-
+@admin.register(Cartridge)
 class CartridgeAdmin(admin.ModelAdmin):
     list_display = ('inventory_number', 'manufacturer', 'model', 'status', 'date_added', 'status_updated')
     list_filter = ('status', 'manufacturer', 'date_added')
@@ -54,7 +53,7 @@ class RefillRecordForm(forms.ModelForm):
         else:
             self.fields['cartridges'].queryset = Cartridge.objects.filter(status=Status.AWAITING_REFILL)
 
-
+@admin.register(RefillRecord)
 class RefillRecordAdmin(admin.ModelAdmin):
     form = RefillRecordForm
     list_display = ('refill_number', 'date_sent')
@@ -70,7 +69,7 @@ class RefillRecordAdmin(admin.ModelAdmin):
             cartridge.status = Status.REFILLING  # Обновляем статус на "На заправке"
             cartridge.save()
 
-
+@admin.register(PrintRecord)
 class PrintRecordAdmin(admin.ModelAdmin):
     list_display = ('cartridge', 'start_page_count', 'end_page_count', 'display_pages_printed', 'date_recorded')
     list_filter = ('date_recorded', 'cartridge')
@@ -84,7 +83,7 @@ class PrintRecordAdmin(admin.ModelAdmin):
 
 
 
-admin.site.register(Cartridge, CartridgeAdmin)
-admin.site.register(RefillRecord, RefillRecordAdmin)
-admin.site.register(PrintRecord, PrintRecordAdmin)
+#admin.site.register(Cartridge, CartridgeAdmin)
+#admin.site.register(RefillRecord, RefillRecordAdmin)
+#admin.site.register(PrintRecord, PrintRecordAdmin)
 
