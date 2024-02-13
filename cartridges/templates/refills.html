@@ -3,23 +3,57 @@
 {% block title %}Список Заправок{% endblock %}
 
 {% block content %}
-<div class="container mt-4">
-    <h2>Список Заправок</h2>
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>Номер заправки</th>
-                <th>Дата</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for items in refills %}
-                <tr>
-                    <td><a href="/cartridges/refills/{{ items.refill_number }}">{{ items.refill_number }}</td>
-                    <td>{{ items.date_sent }}</td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+
+<div class="page-header card">
+    <div class="row align-items-end">
+        <div class="col-lg-8">
+            <div class="page-header-title">
+                <i class="feather icon-credit-card bg-c-blue"></i>
+                <div class="d-inline">
+                    <h2>Список Заправок</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="pcoded-inner-content">
+
+    <div class="main-body">
+        <div class="page-wrapper">
+
+            <div class="page-body">
+
+                <div class="card">
+                    <div class="card-block table-border-style">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Номер заправки</th>
+                                        <th>Колличество картриджей</th>
+                                        <th>Дата</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for items in refills %}
+                                        <tr>
+                                            <td scope="row"><a href="/cartridges/refills/{{ items.id }}">{{ items.refill_number }}</td>
+                                            <td>{{ items.cartridges.count }}</td>
+                                            <td>{{ items.date_sent }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="styleSelector">
+    </div>
 </div>
 {% endblock %}

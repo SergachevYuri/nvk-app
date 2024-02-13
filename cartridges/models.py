@@ -13,7 +13,7 @@ class Status(models.TextChoices):
 class Cartridge(models.Model):
     class Meta:
         db_table = "cartridges"
-        verbose_name = "1. Картриджи"
+        verbose_name = "Картриджи"
         verbose_name_plural = "1. Картриджи"
 
 
@@ -54,7 +54,7 @@ class Cartridge(models.Model):
 class RefillRecord(models.Model):
     class Meta:
         db_table = "refill_record"
-        verbose_name = "2. Заправка"
+        verbose_name = "Заправка"
         verbose_name_plural = "2. Заправка"
 
     refill_number = models.CharField(max_length=100, unique=True, verbose_name="Номер заправки")
@@ -70,7 +70,7 @@ class RefillRecord(models.Model):
 class PrintRecord(models.Model):
     class Meta:
         db_table = "print_record"
-        verbose_name = "3. Отпечатки"
+        verbose_name = "Отпечатки"
         verbose_name_plural = "3. Отпечатки"
 
 

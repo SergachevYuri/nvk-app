@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block title %}Список Картриджей{% endblock %}
+
+{% block content %}
+
+<div class="page-header card">
+    <div class="row align-items-end">
+        <div class="col-lg-8">
+            <div class="page-header-title">
+                <i class="feather icon-credit-card bg-c-blue"></i>
+                <div class="d-inline">
+                    <h2>Список Картриджей</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="pcoded-inner-content">
+
+    <div class="main-body">
+        <div class="page-wrapper">
+
+            <div class="page-body">
+
+                <div class="card">
+                    <div class="card-block table-border-style">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Технический номер картриджа</th>
+                                        <th>Производитель</th>
+                                        <th>Модель</th>
+                                        <th>Статус</th>
+                                        <th>Дата добавления</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for items in cartridge %}
+                                        <tr>
+                                            <td scope="row">{{ items.inventory_number }}</td>
+                                            <td>{{ items.manufacturer }}</td>
+                                            <td>{{ items.model }}</td>
+                                            <td>{{ items.get_status_display }}</td>
+                                            <td>{{ items.date_added }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="styleSelector">
+    </div>
+</div>
+{% endblock %}

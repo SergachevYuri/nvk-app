@@ -1,27 +1,143 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="ru">
+
+<!-- Mirrored from demo.dashboardpack.com/admindek-html/default/bs-basic-table.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 13 Feb 2024 03:02:30 GMT -->
+
 <head>
-    <meta charset="UTF-8">
-    <title>{% block title %}Мой сайт{% endblock %}</title>
-    <!-- В <head> -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>{% block title %}NVK Sakha{% endblock %}</title>
 
+
+    <!--[if lt IE 10]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+      <![endif]-->
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description"
+        content="Admindek Bootstrap admin template made using Bootstrap 4 and it has huge amount of ready made feature, UI components, pages which completely fulfills any dashboard needs." />
+    <meta name="keywords"
+        content="bootstrap, bootstrap admin template, admin theme, admin dashboard, dashboard template, admin template, responsive" />
+    <meta name="author" content="colorlib" />
+
+    <link rel="icon" href="{%static 'files/assets/images/favicon.ico'%}" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Quicksand:500,700" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="{%static 'files/bower_components/bootstrap/css/bootstrap.min.css'%}">
+
+    <link rel="stylesheet" href="{%static 'files/assets/pages/waves/css/waves.min.css'%}" type="text/css" media="all">
+
+    <link rel="stylesheet" type="text/css" href="{%static 'files/assets/icon/feather/css/feather.css'%}">
+
+    <link rel="stylesheet" type="text/css" href="{%static 'files/assets/icon/themify-icons/themify-icons.css'%}">
+
+    <link rel="stylesheet" type="text/css" href="{%static 'files/assets/icon/font-awesome/css/font-awesome.min.css'%}">
+
+    <link rel="stylesheet" type="text/css" href="{%static 'files/assets/icon/icofont/css/icofont.css'%}">
+
+    <link rel="stylesheet" type="text/css" href="{%static 'files/assets/css/style.css'%}">
+    <link rel="stylesheet" type="text/css" href="{%static 'files/assets/css/pages.css'%}">
 </head>
+
 <body>
-    <header>
-        <!-- Навигационная панель -->
-    </header>
 
-    <main role="main" class="container">
-        {% block content %}{% endblock %}
-    </main>
+    <div class="loader-bg">
+        <div class="loader-bar"></div>
+    </div>
 
-    <footer>
-        <!-- Подвал сайта -->
-    </footer>
+    <div id="pcoded" class="pcoded">
+        <div class="pcoded-overlay-box"></div>
+        <div class="pcoded-container navbar-wrapper">
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+            {% include "header-navbar.html" %}
+
+            {% include "sidebar.html" %}
+
+            {% include "chat.html" %}
+            
+
+            <div class="pcoded-main-container">
+                <div class="pcoded-wrapper">
+
+                    {% include "navi.html" %}
+
+                    <div class="pcoded-content">
+
+                        {% block content %}{% endblock %}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!--[if lt IE 10]>
+    <div class="ie-warning">
+        <h1>Warning!!</h1>
+        <p>You are using an outdated version of Internet Explorer, please upgrade <br/>to any of the following web browsers to access this website.</p>
+        <div class="iew-container">
+            <ul class="iew-download">
+                <li>
+                    <a href="http://www.google.com/chrome/">
+                        <img src="{%static 'files/assets/images/browser/chrome.png' %}" alt="Chrome">
+                        <div>Chrome</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.mozilla.org/en-US/firefox/new/">
+                        <img src="{%static 'files/assets/images/browser/firefox.png' %}" alt="Firefox">
+                        <div>Firefox</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="http://www.opera.com">
+                        <img src="{%static 'files/assets/images/browser/opera.png' %}" alt="Opera">
+                        <div>Opera</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.apple.com/safari/">
+                        <img src="{%static 'files/assets/images/browser/safari.png' %}" alt="Safari">
+                        <div>Safari</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="http://windows.microsoft.com/en-us/internet-explorer/download-ie">
+                        <img src="{%static 'files/assets/images/browser/ie.png' %}" alt="">
+                        <div>IE (9 & above)</div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <p>Sorry for the inconvenience!</p>
+    </div>
+    <![endif]-->
+
+
+    <script type="text/javascript" src="{%static 'files/bower_components/jquery/js/jquery.min.js'%}"></script>
+    <script type="text/javascript" src="{%static 'files/bower_components/jquery-ui/js/jquery-ui.min.js'%}"></script>
+    <script type="text/javascript" src="{%static 'files/bower_components/popper.js/js/popper.min.js'%}"></script>
+    <script type="text/javascript" src="{%static 'files/bower_components/bootstrap/js/bootstrap.min.js'%}"></script>
+
+    <script src="{%static 'files/assets/pages/waves/js/waves.min.js'%}"></script>
+
+    <script type="text/javascript"
+        src="{%static 'files/bower_components/jquery-slimscroll/js/jquery.slimscroll.js'%}"></script>
+
+    <script src="{%static 'files/assets/pages/waves/js/waves.min.js'%}"></script>
+
+    <script type="text/javascript" src="{%static 'iles/bower_components/modernizr/js/modernizr.js'%}"></script>
+    <script type="text/javascript" src="{%static 'files/bower_components/modernizr/js/css-scrollbars.js'%}"></script>
+
+    <script src="{%static 'files/assets/js/pcoded.min.js'%}"></script>
+    <script src="{%static 'files/assets/js/vertical/vertical-layout.min.js'%}"></script>
+    <script src="{%static 'files/assets/js/jquery.mCustomScrollbar.concat.min.js'%}"></script>
+    <script type="text/javascript" src="{%static 'files/assets/js/script.js'%}"></script>
 </body>
+
 </html>
