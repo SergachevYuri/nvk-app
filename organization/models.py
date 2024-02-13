@@ -30,3 +30,9 @@ class Department(models.Model):
 
     def __str__(self):
         return f"{self.directorate} - {self.name}"
+    
+    def get_name(self):
+        return self.name
+    
+    def get_directorate(self):
+        return self.directorate

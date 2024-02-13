@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     "accounts",
     "cartridges",
     "journal",
-    "organization"
+    "organization",
+    "phonebook"
 ]
 
 MIDDLEWARE = [
