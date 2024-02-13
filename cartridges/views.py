@@ -17,5 +17,5 @@ def cartridges(request):
 
 
 def inrefills(request):
-    refills = RefillRecord.objects.all()
-    return render(request, 'refills.html', {'refills': refills})
+    cartridges = Cartridge.objects.filter(status="RF")
+    return render(request, 'inrefills.html', {'cartridge': cartridges})
