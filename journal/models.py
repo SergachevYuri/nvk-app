@@ -1,5 +1,8 @@
 from django.db import models
 from django.utils import timezone
+from django.utils.translation import gettext_lazy as _
+
+
 
 
 # Create your models here.
@@ -17,29 +20,13 @@ tags
 
 '''
 
-
-
-
-class Department(models.Model):
-    class Meta:
-        db_table = 'department'
-        verbose_name = 'Отдел'
-        verbose_name_plural = 'Отделы'
-
-    department = models.CharField(max_length=100, verbose_name="Название отдела")
-
-    def __str__(self):
-        return f"{self.department}"
-    
-
-
 class Journal(models.Model):
     class Meta:
         db_table = 'journal'
         verbose_name = 'Журнал'
         verbose_name_plural = 'Журналы'
 
-    department = models.ForeignKey(Department, on_delete=models.CASCADE, verbose_name="Отдел")
+    department = models.ForeignKey("organization.Department", verbose_name=_("Отдел"), on_delete=models.CASCADE)
     username = models.CharField(max_length=255, verbose_name="Фамилия Имя Отчество")
     description = models.TextField(verbose_name="Описание проблемы")
     solution = models.TextField(verbose_name="Решение проблемы")
