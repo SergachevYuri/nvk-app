@@ -33,6 +33,7 @@
                                         <th>ФИО</th>
                                         <th>Отдел</th>
                                         <th>Дирекция</th>
+                                        <th>Кабинет</th>
                                         <th>SIP</th>
                                         <th>Телефон</th>
                                         <th>Здание</th>
@@ -45,6 +46,7 @@
                                             <td scope="row">{{ items.name }}</td>
                                             <td>{{ items.department.get_name }}</td>
                                             <td>{{ items.department.get_directorate }}</td>
+                                            <td>{{ items.cabinet }}</td>
                                             <td>{{ items.sip }}</td>
                                             <td>{{ items.phone }}</td>
                                             <td>{{ items.get_bilding_display }}</td>
