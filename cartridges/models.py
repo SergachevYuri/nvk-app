@@ -2,6 +2,8 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django.utils import timezone
 
+from cartridges.views import cartridges
+
 class Status(models.TextChoices):
     NEW = 'NW', _('Новый')
     AWAITING_REFILL = 'AW', _('Ожидание заправки')
@@ -32,7 +34,7 @@ class Cartridge(models.Model):
         if new_status == Status.AWAITING_REFILL:
             if page_count is not None:
                 # Пытаемся найти последнюю запись PrintRecord без end_page_count
-                last_record = self.printrecord_set.filter(end_page_count__isnull=True).last()
+                last_record = self.printrecord_set.filter(end_page_count__isnull=True, cartridge=self).order_by('-date_recorded').last()
                 if last_record:
                     # Если запись найдена, обновляем её
                     last_record.end_page_count = page_count

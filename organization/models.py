@@ -36,3 +36,7 @@ class Department(models.Model):
     
     def get_directorate(self):
         return self.directorate
+    
+    def get_departments_by_directorate(self, directorate_id):
+        departments = self.objects.filter(directorate_id=directorate_id)
+        return departments
