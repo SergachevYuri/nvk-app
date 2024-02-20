@@ -28,14 +28,18 @@ class Equipment(models.Model):
 
     name = models.CharField(verbose_name="Название", max_length=100)
     type = models.ForeignKey('TypeEquipment', verbose_name="Тип", on_delete=models.SET_NULL, blank=True, null=True)
-    serial_number = models.CharField(verbose_name="Серийный номер", max_length=100, blank=True)
-    inventory_number = models.CharField(verbose_name="Инвентарынй номер", max_length=100, blank=True)
+    serial_number = models.CharField(verbose_name="Серийный номер", unique=True, max_length=100, blank=True)
+    inventory_number = models.CharField(verbose_name="Инвентарынй номер", unique=True, max_length=100, blank=True)
     manufacturer = models.CharField(verbose_name="Производитель", max_length=100)
     model = models.CharField(verbose_name="Модель", max_length=100) 
     status = models.CharField(max_length=10, choices=Status.choices, default=Status.NEW, verbose_name="Статус")
     department = models.ForeignKey('organization.Department', verbose_name="Отдел / Подразделение", on_delete=models.SET_NULL, blank=True, null=True)
     description = models.TextField(verbose_name="Описание", blank=True)
     notes = models.TextField(verbose_name="Записи", blank=True)
+
+
+    def __str__(self):
+        return f"{self.name} - {self.status}"
 
 
 
@@ -49,3 +53,28 @@ class TypeEquipment(models.Model):
 
 
     name = models.CharField(max_length=100)
+    description = models.TextField(blank=True)
+
+    def __str__(self):
+        return self.name
+
+
+
+class EquipmentStatusHistory(models.Model):
+
+    class Meta:
+        db_table = "equipment_status_history"
+        verbose_name = "История статусов оборудования"
+        verbose_name_plural = "Истории статусов оборудования"
+
+
+    equipment = models.ForeignKey(Equipment, on_delete=models.CASCADE, verbose_name="Оборудование")
+    previous_status = models.CharField(max_length=20, choices=Status.choices, verbose_name="Предыдущий статус")
+    new_status = models.CharField(max_length=20, choices=Status.choices, verbose_name="Новый статус")
+    change_date = models.DateTimeField(auto_now_add=True, verbose_name="Дата изменения")
+    changed_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, verbose_name="Изменено пользователем")
+    comment = models.TextField(blank=True, null=True, verbose_name="Комментарий")
+
+
+    def __str__(self):
+        return f"{self.equipment.name} - {self.new_status} on {self.change_date}"
