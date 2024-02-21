@@ -1,5 +1,7 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+from django.contrib.auth.models import User
+
 
 
 class Status(models.TextChoices):
@@ -30,16 +32,19 @@ class Equipment(models.Model):
     type = models.ForeignKey('TypeEquipment', verbose_name="Тип", on_delete=models.SET_NULL, blank=True, null=True)
     serial_number = models.CharField(verbose_name="Серийный номер", unique=True, max_length=100, blank=True)
     inventory_number = models.CharField(verbose_name="Инвентарынй номер", unique=True, max_length=100, blank=True)
-    manufacturer = models.CharField(verbose_name="Производитель", max_length=100)
+    manufacturer = models.ForeignKey('EquipmentManufacture', verbose_name="Производитель", on_delete=models.SET_NULL, blank=True, null=True)
     model = models.CharField(verbose_name="Модель", max_length=100) 
-    status = models.CharField(max_length=10, choices=Status.choices, default=Status.NEW, verbose_name="Статус")
+    status = models.CharField(max_length=12, choices=Status.choices, default=Status.NEW, verbose_name="Статус")
     department = models.ForeignKey('organization.Department', verbose_name="Отдел / Подразделение", on_delete=models.SET_NULL, blank=True, null=True)
     description = models.TextField(verbose_name="Описание", blank=True)
     notes = models.TextField(verbose_name="Записи", blank=True)
+    is_component = models.BooleanField(default=False, verbose_name="Является составным")
+    parent_equipment = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='components', verbose_name="Основное оборудование")
+
 
 
     def __str__(self):
-        return f"{self.name} - {self.status}"
+        return f"{self.name} - {self.model}"
 
 
 
@@ -78,3 +83,19 @@ class EquipmentStatusHistory(models.Model):
 
     def __str__(self):
         return f"{self.equipment.name} - {self.new_status} on {self.change_date}"
+
+
+
+class EquipmentManufacture(models.Model):
+
+    class Meta:
+        db_table = "equipment_manufacture"
+        verbose_name = "Производитель оборудования"
+        verbose_name_plural = "Производители оборудования"
+
+
+    name = models.CharField(max_length=100, verbose_name="Название")
+    description = models.TextField(blank=True, verbose_name="Описание")
+
+    def __str__(self):
+        return self.name
