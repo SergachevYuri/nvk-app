@@ -9,3 +9,6 @@ python manage.py makemigrations
 python manage.py migrate
 
 
+docker-compose run django python manage.py migrate
+
+docker-compose run django python manage.py createsuperuser
