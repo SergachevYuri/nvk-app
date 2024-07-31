@@ -10,6 +10,7 @@ services:
       - "8000:8000"
     environment:
       - DEBUG=1 # Подставьте сюда ваши переменные окружения
+    restart: always
 
   pgdb:
     # Использование готового образа postgres
