@@ -1,7 +1,7 @@
 version: '3.11'
 
 services:
-  web:
+  django:
     build: .
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
@@ -10,3 +10,20 @@ services:
       - "8000:8000"
     environment:
       - DEBUG=1 # Подставьте сюда ваши переменные окружения
+
+  pgdb:
+    # Использование готового образа postgres
+    image: postgres
+    # Задание переменных окружения для контейнера с postgres
+    environment:
+      - POSTGRES_DB=nvk
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+     # Задание имени контейнера для сервиса pgdb
+    container_name: pgdb
+     # Связывание тома с директорией в контейнере для сохранения данных postgres
+    volumes:
+      - pgdbdata:/var/lib/postgresql/data/
+
+volumes:
+  pgdbdata: null
