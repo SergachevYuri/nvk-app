@@ -5,4 +5,4 @@ from .models import Phonebook
 
 def index(request):
     phonebook = Phonebook.objects.all()
-    return render(request, 'index.html', {'phonebook': phonebook})
+    return render(request, 'phonebook.html', {'phonebook': phonebook})

@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}Switch Ports{% endblock %}
+
+{% block content %}
+<h1>Порты свитча {{ switch.hostname }}</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Номер порта</th>
+            <th>Статус</th>
+            <th>IP-адрес</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for port in ports %}
+        <tr>
+            <td>{{ port.number }}</td>
+            <td>{{ port.status }}</td>
+            <td>{{ port.ip_address }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}IP Addresses{% endblock %}
+
+{% block content %}
+<h1>Список присвоенных IP-адресов</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>IP-адрес</th>
+            <th>Hostname</th>
+            <th>Описание</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for ip in ip_addresses %}
+        <tr>
+            <td>{{ ip.ip_address }}</td>
+            <td>{{ ip.hostname }}</td>
+            <td>{{ ip.description }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

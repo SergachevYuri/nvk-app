@@ -5,7 +5,7 @@ from .models import Cartridge, RefillRecord, PrintRecord, Status
 
 
 class CartridgeAdminForm(forms.ModelForm):
-    page_count = forms.IntegerField(required=False, label='Количество страниц', help_text='Введите текущее количество страниц при смене статуса.')
+    page_count = forms.IntegerField(required=True, label='Количество страниц', help_text='Введите текущее количество страниц при смене статуса.')
 
     class Meta:
         model = Cartridge
@@ -23,7 +23,7 @@ class CartridgeAdmin(admin.ModelAdmin):
     def get_form(self, request, obj=None, **kwargs):
         form = super(CartridgeAdmin, self).get_form(request, obj, **kwargs)
         if obj and obj.status in [Status.REFILLED, Status.IN_USE]:  # Проверяем статус объекта
-            form.base_fields['page_count'].required = False  # Делаем поле необязательным
+            form.base_fields['page_count'].required = True  # Делаем поле ОБЯЗАТЕЛЬНЫМ  
         else:
             form.base_fields.pop('page_count', None)  # Удаляем поле из формы, если статус не подходит
         return form

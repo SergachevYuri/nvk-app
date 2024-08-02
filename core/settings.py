@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     "journal",
     "organization",
     "phonebook",
-    "equipment"
+    "equipment",
+    "network"
 ]
 
 MIDDLEWARE = [
