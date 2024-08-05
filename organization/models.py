@@ -22,6 +22,8 @@ class Department(models.Model):
         db_table = "department"
         verbose_name = "Отдел"
         verbose_name_plural = "Отдел"
+        ordering = ["directorate"]
+
 
     
     directorate = models.ForeignKey("Directorate", verbose_name=_("Дирекция"), on_delete=models.CASCADE)
