@@ -25,7 +25,7 @@ class Department(models.Model):
 
     
     directorate = models.ForeignKey("Directorate", verbose_name=_("Дирекция"), on_delete=models.CASCADE)
-    name = models.CharField(_("Отдел"), max_length=255)
+    name = models.CharField(_("Отдел"), max_length=255, blank=True, null=False)
 
 
     def __str__(self):

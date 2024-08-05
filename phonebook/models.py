@@ -23,12 +23,13 @@ class Phonebook(models.Model):
     name = models.CharField(max_length=255, verbose_name="ФИО", unique=True, blank=True, null=True)
     cabinet = models.CharField(max_length=255, verbose_name="Кабинет")
     bilding = models.CharField(max_length=4, choices=BUILDING.choices, default=BUILDING.RK, verbose_name="Корпус")
-    department = models.ForeignKey('organization.Department', on_delete=models.CASCADE, verbose_name="Отдел")
+    department = models.ForeignKey('organization.Department', on_delete=models.CASCADE, verbose_name="Отдел", blank=True, null=True)
+    job_title = models.CharField(max_length=255, verbose_name="Должность", blank=False, null=False)
     sip = models.CharField(max_length=255, verbose_name="SIP телефон", blank=True, null=True)
     phone = models.CharField(max_length=255, verbose_name="Городский телефон", blank=True, null=True)
     email = models.EmailField(max_length=255, verbose_name="Почта", blank=True, null=True)
     
 
     def __str__(self):
-        return self.sip
+        return self.name
 
