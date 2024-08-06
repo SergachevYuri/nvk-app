@@ -5,7 +5,7 @@ from .models import Phonebook
 
 class PhonebookAdmin(admin.ModelAdmin):
     list_display = ('name', 'job_title', 'department', 'cabinet', 'bilding', 'sip', 'phone', 'email')
-    search_fields = ('name', 'job_title', 'department', 'cabinet', 'bilding', 'sip', 'phone', 'email')
+    search_fields = ('name', 'job_title', 'cabinet', 'bilding', 'sip', 'phone', 'email')
     list_filter = ('department', 'cabinet', 'bilding')
 
 
