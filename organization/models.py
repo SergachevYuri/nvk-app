@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+from django.db.models import F
 
 
 class Directorate(models.Model):
@@ -22,7 +23,7 @@ class Department(models.Model):
         db_table = "department"
         verbose_name = "Отдел"
         verbose_name_plural = "Отдел"
-        ordering = ["directorate"]
+        ordering = [F("directorate").asc(nulls_last=True)]
 
 
     
