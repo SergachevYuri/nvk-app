@@ -1,8 +1,12 @@
 from django.shortcuts import render
 from .models import Phonebook
-
-# Create your views here.
+from organization.models import Directorate, Department
 
 def index(request):
-    phonebook = Phonebook.objects.all().order_by('department')
-    return render(request, 'phonebook.html', {'phonebook': phonebook})
+    departments = Department.objects.all()
+    phonebook = Phonebook.objects.all()
+    context = {
+        'departments': departments,
+        'phonebook': phonebook,
+    }
+    return render(request, 'phonebook.html', context)
