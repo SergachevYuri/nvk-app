@@ -23,6 +23,7 @@ class Department(models.Model):
         db_table = "department"
         verbose_name = "Отдел"
         verbose_name_plural = "Отдел"
+        ordering = [F("directorate").asc(nulls_last=True)]
 
 
     
