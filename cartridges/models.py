@@ -61,6 +61,7 @@ class RefillRecord(models.Model):
     cartridges = models.ManyToManyField(Cartridge, verbose_name="Картриджи")
     date_sent = models.DateTimeField(default=timezone.now, verbose_name="Дата отправки на заправку")
     notice = models.TextField(default='', verbose_name="Примечание")
+    date_returned = models.DateTimeField(null=True, blank=True, verbose_name="Дата возврата")
 
     def __str__(self):
         return f"Заправка №{self.refill_number} от {self.date_sent.strftime('%Y-%m-%d')}"

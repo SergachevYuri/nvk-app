@@ -1,6 +1,7 @@
 from django import forms
 from django.db import models
 from django.contrib import admin
+from django.utils import timezone
 from .models import Cartridge, RefillRecord, PrintRecord, Status
 
 
@@ -66,14 +67,39 @@ class RefillRecordForm(forms.ModelForm):
         else:
             self.fields['cartridges'].queryset = Cartridge.objects.filter(status=Status.AWAITING_REFILL)
 
+        # Добавляем поле для даты возврата с заправки
+        self.fields['date_returned'] = forms.DateTimeField(
+            label='Дата возврата с заправки',
+            required=False,  # Поле не обязательно для заполнения
+            widget=forms.DateTimeInput(attrs={'type': 'datetime-local'}),
+        )
+
+
 @admin.register(RefillRecord)
 class RefillRecordAdmin(admin.ModelAdmin):
     form = RefillRecordForm
-    list_display = ('refill_number', 'date_sent')
-    list_filter = ('date_sent',)
+    list_display = ('refill_number', 'date_sent', 'date_returned')
+    list_filter = ('date_sent', 'date_returned')
     search_fields = ('refill_number',)
     filter_horizontal = ('cartridges',)
 
+    actions = ['mark_as_checked']  # Добавляем действие "Пометить как проверенные"
+
+    def mark_as_checked(self, request, queryset):
+        """Помечает выбранные картриджи как "На проверке" и устанавливает время возврата."""
+        updated_count = 0
+        for refill_record in queryset:
+            for cartridge in refill_record.cartridges.all():
+                if cartridge.status == Status.REFILLING:
+                    cartridge.status = Status.CHECKING
+                    cartridge.status_updated = timezone.now()  # Устанавливаем время возврата
+                    cartridge.save()
+                    updated_count += 1
+            refill_record.date_returned = timezone.now()  # Устанавливаем время возврата
+            refill_record.save()
+        self.message_user(request, f"Обновлено {updated_count} картриджей.")
+
+    mark_as_checked.short_description = "Поместить на проверку"
 
     def save_related(self, request, form, formsets, change):
         super(RefillRecordAdmin, self).save_related(request, form, formsets, change)
@@ -81,6 +107,7 @@ class RefillRecordAdmin(admin.ModelAdmin):
         for cartridge in cartridges:
             cartridge.status = Status.REFILLING  # Обновляем статус на "На заправке"
             cartridge.save()
+
 
 @admin.register(PrintRecord)
 class PrintRecordAdmin(admin.ModelAdmin):
