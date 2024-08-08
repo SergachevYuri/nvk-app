@@ -14,7 +14,20 @@ class CartridgeAdminForm(forms.ModelForm):
 
 @admin.register(Cartridge)
 class CartridgeAdmin(admin.ModelAdmin):
-    list_display = ('inventory_number', 'manufacturer', 'model', 'status', 'date_added', 'status_updated')
+
+    def get_queryset(self, request):
+        qs = super().get_queryset(request)
+        return qs.annotate(
+            refill_count=models.Count('refillrecord', distinct=True)
+        )
+
+    def refill_count(self, obj):
+        """Returns the refill count for the cartridge."""
+        return obj.refill_count
+
+    refill_count.short_description = "Количество заправок"  # Переименование заголовка колонки
+
+    list_display = ('inventory_number', 'manufacturer', 'model', 'status', 'date_added', 'status_updated', 'refill_count')
     list_filter = ('status', 'manufacturer', 'date_added')
     search_fields = ('inventory_number', 'manufacturer', 'model')
 
