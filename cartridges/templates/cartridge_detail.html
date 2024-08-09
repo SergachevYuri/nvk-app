@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Детализация Картриджа</title>
+</head>
+<body>
+    <h1>Детализация Картриджа</h1>
+    <div>
+        <h2>Номер: {{ cartridge.inventory_number }}</h2>
+        <h2>Производитель: {{ cartridge.manufacturer }}</h2>
+        <h2>Модель: {{ cartridge.model }}</h2>
+        <h2>Статус: {{ cartridge.get_status_display }}</h2>
+        <h2>Дата добавления: {{ cartridge.date_added }}</h2>
+        <h2>QR-Code:</h2>
+        <img src="data:image/png;base64,{{ cartridge.qr_code_data }}" alt="QR Code" width="200" height="200">
+    </div>
+</body>
+</html>
