@@ -10,37 +10,7 @@
     <div class="container-fluid">
         <div class="row">
             <!-- Боковая панель навигации -->
-            <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar">
-                <div class="position-sticky">
-                    <ul class="nav flex-column">
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'network_home' %}">
-                                Главная
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'switches' %}">
-                                Свитчи
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'ip_addresses' %}">
-                                IP-адреса
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'phonebook' %}">
-                                Телефонная книга
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'cartridges' %}">
-                                Картриджи
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
+            {% extends "nav.html" %}
 
             <!-- Основное содержимое -->
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
