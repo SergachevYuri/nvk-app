@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from .models import Cartridge
 import qrcode
 import io
@@ -53,3 +53,29 @@ def cartridge_list(request):
         'cartridges': cartridges,
     }
     return render(request, 'cartridge_list.html', context)
+
+
+def cartridge_detail(request, cartridge_id):
+    cartridge = get_object_or_404(Cartridge, pk=cartridge_id)
+
+    # Генерация QR-кода для картриджа
+    qr = qrcode.QRCode(
+        version=1,
+        box_size=10,
+        border=5
+    )
+    qr.add_data(request.build_absolute_uri(f'/cartridges/{cartridge.id}/'))
+    qr.make(fit=True)
+
+    # Создание изображения QR-кода
+    qr_code_image = qr.make_image(fill_color="black", back_color="white")
+
+    # Преобразование изображения в base64
+    buffer = io.BytesIO()
+    qr_code_image.save(buffer)
+    cartridge.qr_code_data = base64.b64encode(buffer.getvalue()).decode()
+
+    context = {
+        'cartridge': cartridge,
+    }
+    return render(request, 'cartridge_detail.html', context)
