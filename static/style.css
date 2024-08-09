@@ -1,0 +1,56 @@
+/* Боковое меню навигации */
+.sidebar {
+    margin: 0;
+    padding: 0;
+    width: 200px;
+    background-color: #f1f1f1;
+    position: fixed;
+    height: 100%;
+    overflow: auto;
+  }
+  
+  /* Боковой панели ссылок */
+  .sidebar a {
+    display: block;
+    color: black;
+    padding: 16px;
+    text-decoration: none;
+  }
+  
+  /* Активная/текущая ссылка */
+  .sidebar a.active {
+    background-color: rgb(123, 185, 221);
+    color: white;
+  } 
+  
+  /* Ссылки на мышь-над */
+  .sidebar a:hover:not(.active) {
+    background-color: #555;
+    color: white;
+  }
+  
+  /* Содержимое страницы. Значение свойства margin-left должно совпадать со значением свойства width боковой панели */
+  div.content {
+    margin-left: 200px;
+    padding: 1px 16px;
+    height: 1000px;
+  }
+  
+  /* На экранах, которые меньше 700px в ширину, сделать боковую панель в верхней панели */
+  @media screen and (max-width: 700px) {
+    .sidebar {
+      width: 100%;
+      height: auto;
+      position: relative;
+    }
+    .sidebar a {float: left;}
+    div.content {margin-left: 0;}
+  }
+  
+  /* На экранах размером менее 400 пикселей панель отображается вертикально, а не горизонтально */
+  @media screen and (max-width: 400px) {
+    .sidebar a {
+      text-align: center;
+      float: none;
+    }
+  }
