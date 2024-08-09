@@ -11,6 +11,7 @@
                 <th>Номер</th>
                 <th>Производитель</th>
                 <th>Модель</th>
+                <th>Статус</th>
                 <th>Дата добавления</th>
                 <th>QR-Code</th>
             </tr>
@@ -21,6 +22,7 @@
                     <td>{{ cartridge.inventory_number }}</td>
                     <td>{{ cartridge.manufacturer }}</td>
                     <td>{{ cartridge.model }}</td>
+                    <td>{{ cartridge.get_status_display }}</td>
                     <td>{{ cartridge.date_added }}</td>
                     <td>
                         <img src="data:image/png;base64,{{ cartridge.qr_code_data }}" alt="QR Code" width="100" height="100">
