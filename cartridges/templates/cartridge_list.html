@@ -1,35 +1,68 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Список картриджей</title>
-</head>
-<body>
-    <h1>Список картриджей</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>Номер</th>
-                <th>Производитель</th>
-                <th>Модель</th>
-                <th>Статус</th>
-                <th>Дата добавления</th>
-                <th>QR-Code</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for cartridge in cartridges %}
-                <tr>
-                    <td>{{ cartridge.inventory_number }}</td>
-                    <td>{{ cartridge.manufacturer }}</td>
-                    <td>{{ cartridge.model }}</td>
-                    <td>{{ cartridge.get_status_display }}</td>
-                    <td>{{ cartridge.date_added }}</td>
-                    <td>
-                        <img src="data:image/png;base64,{{ cartridge.qr_code_data }}" alt="QR Code" width="100" height="100">
-                    </td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-</body>
-</html>
+
+{% extends "base.html" %}
+
+{% block title %}Список Картриджей{% endblock %}
+
+{% block content %}
+
+<div class="page-header card">
+    <div class="row align-items-end">
+        <div class="col-lg-8">
+            <div class="page-header-title">
+                <i class="feather icon-credit-card bg-c-blue"></i>
+                <div class="d-inline">
+                    <h2>Список Картриджей</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="pcoded-inner-content">
+
+    <div class="main-body">
+        <div class="page-wrapper">
+
+            <div class="page-body">
+
+                <div class="card">
+                    <div class="card-block table-border-style">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Номер</th>
+                                        <th>Производитель</th>
+                                        <th>Модель</th>
+                                        <th>Статус</th>
+                                        <th>Дата добавления</th>
+                                        <th>QR-Code</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for cartridge in cartridges %}
+                                        <tr>
+                                            <td>{{ cartridge.inventory_number }}</td>
+                                            <td>{{ cartridge.manufacturer }}</td>
+                                            <td>{{ cartridge.model }}</td>
+                                            <td>{{ cartridge.get_status_display }}</td>
+                                            <td>{{ cartridge.date_added }}</td>
+                                            <td>
+                                                <img src="data:image/png;base64,{{ cartridge.qr_code_data }}" alt="QR Code" width="100" height="100">
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="styleSelector">
+    </div>
+</div>
+{% endblock %}
