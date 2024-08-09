@@ -77,6 +77,8 @@ class RefillRecordForm(forms.ModelForm):
 
 @admin.register(RefillRecord)
 class RefillRecordAdmin(admin.ModelAdmin):
+    readonly_fields=('date_returned', )
+
     form = RefillRecordForm
     list_display = ('refill_number', 'date_sent', 'date_returned')
     list_filter = ('date_sent', 'date_returned')
