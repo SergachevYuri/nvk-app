@@ -42,7 +42,11 @@
             <label>QR код:</label>
             <img src="data:image/png;base64,{{ cartridge.qr_code_data }}" alt="QR Code" width="200" height="200">
         </div>
-
-        <button class="status-button">Сменить статус</button>
+        {% if cartridge.status == 'CH' %}
+            <form method="POST" action="{% url 'cartridge_confirm_refill' cartridge.id %}">
+                {% csrf_token %}
+                <button type="submit" class="status-button">Сменить статус на "Заправленный"</button>
+            </form>
+        {% endif %}
     </div>
 {% endblock %}

@@ -48,9 +48,6 @@ class Cartridge(models.Model):
         self.save()
 
 
-
-
-
 class RefillRecord(models.Model):
     class Meta:
         db_table = "refill_record"

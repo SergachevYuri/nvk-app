@@ -1,9 +1,9 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from .models import Cartridge
 import qrcode
 import io
 import base64
-from .models import RefillRecord, Cartridge
+from .models import RefillRecord, Cartridge, Status
 
 def refill_detail(request, refill_id):
     refill = get_object_or_404(RefillRecord, pk=refill_id)
@@ -79,3 +79,14 @@ def cartridge_detail(request, cartridge_id):
         'cartridge': cartridge,
     }
     return render(request, 'cartridge_detail.html', context)
+
+
+def cartridge_confirm_refill(request, cartridge_id):
+    cartridge = get_object_or_404(Cartridge, pk=cartridge_id)
+
+    if request.method == 'POST':
+        cartridge.status = Status.REFILLED  # Assuming you have a Status.REFILLED value
+        cartridge.save()
+        return redirect('cartridge_detail', cartridge_id=cartridge_id)  # Redirect back to the detail page
+
+    return redirect('cartridge_list')  # Or redirect to another page
