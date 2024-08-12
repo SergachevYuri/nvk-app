@@ -82,7 +82,7 @@ def cartridge_detail(request, cartridge_id):
         'cartridge': cartridge,
         'last_refill_date': last_refill_date,
     }
-    return render(request, 'cartridges/cartridge_detail.html', context)
+    return render(request, 'cartridge_detail.html', context)
 
 
 
