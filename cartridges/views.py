@@ -75,10 +75,15 @@ def cartridge_detail(request, cartridge_id):
     qr_code_image.save(buffer)
     cartridge.qr_code_data = base64.b64encode(buffer.getvalue()).decode()
 
+    last_refill = cartridge.refillrecord_set.order_by('-date_sent').first()
+    last_refill_date = last_refill.date_sent if last_refill else None
+
     context = {
         'cartridge': cartridge,
+        'last_refill_date': last_refill_date,
     }
-    return render(request, 'cartridge_detail.html', context)
+    return render(request, 'cartridges/cartridge_detail.html', context)
+
 
 
 def cartridge_confirm_refill(request, cartridge_id):

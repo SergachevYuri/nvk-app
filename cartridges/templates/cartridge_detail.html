@@ -36,6 +36,11 @@
             <span>{{ cartridge.status_updated }}</span>
         </div>
 
+        <div class="data-row">
+            <label>Дата последней заправки:</label>
+            <span>{{ {{ last_refill_date|date:"Y-m-d" }} }}</span>
+        </div>
+
         
 
         <div class="qr-code">
