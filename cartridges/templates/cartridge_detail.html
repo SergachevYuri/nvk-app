@@ -1,18 +1,57 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Детализация Картриджа</title>
-</head>
-<body>
-    <h1>Детализация Картриджа</h1>
-    <div>
-        <h2>Номер: {{ cartridge.inventory_number }}</h2>
-        <h2>Производитель: {{ cartridge.manufacturer }}</h2>
-        <h2>Модель: {{ cartridge.model }}</h2>
-        <h2>Статус: {{ cartridge.get_status_display }}</h2>
-        <h2>Дата добавления: {{ cartridge.date_added }}</h2>
-        <h2>QR-Code:</h2>
-        <img src="data:image/png;base64,{{ cartridge.qr_code_data }}" alt="QR Code" width="200" height="200">
+{% extends "base.html" %}
+
+{% block title %}Данные по картриджу{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h2>Информация о картридже</h2>
+
+        <div class="data-row">
+            <label>Инвентаризационный номер:</label>
+            <span>{{ cartridge.inventory_number }}</span>
+        </div>
+
+        <div class="data-row">
+            <label>Производитель:</label>
+            <span>{{ cartridge.manufacturer }}</span>
+        </div>
+
+        <div class="data-row">
+            <label>Модель:</label>
+            <span>{{ cartridge.model }}</span>
+        </div>
+
+        <div class="data-row">
+            <label>Статус:</label>
+            <span>{{ cartridge.get_status_display }}</span>
+        </div>
+
+        <div class="data-row">
+            <label>Дата добавления:</label>
+            <span>{{ cartridge.date_added }}</span>
+        </div>
+
+        <div class="data-row">
+            <label>Дата изменения статуса:</label>
+            <span>{{ cartridge.status_updated }}</span>
+        </div>
+
+        <div class="data-row">
+            <label>Дата последней заправки:</label>
+            <span>{{ last_refill_date }}</span>
+        </div>
+
+        
+
+        <div class="qr-code">
+            <label>QR код:</label>
+            <img src="data:image/png;base64,{{ cartridge.qr_code_data }}" alt="QR Code" width="200" height="200">
+        </div>
+        {% if cartridge.status == 'CH' %}
+            <form method="POST" action="{% url 'cartridge_confirm_refill' cartridge.id %}">
+                {% csrf_token %}
+                <button type="submit" class="status-button">Сменить статус на "Заправленный"</button>
+            </form>
+        {% endif %}
     </div>
-</body>
-</html>
+{% endblock %}

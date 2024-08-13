@@ -8,4 +8,5 @@ urlpatterns = [
     path('inrefills/', views.inrefills, name='refills'),
     path('refills/<int:refill_id>/', views.refill_detail, name='refill_detail'),
     path('list/', views.cartridge_list, name='cartridge_list'),
+    path('<int:cartridge_id>/confirm_refill/', views.cartridge_confirm_refill, name='cartridge_confirm_refill'),
 ]

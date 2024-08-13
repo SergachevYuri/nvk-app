@@ -1,9 +1,9 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from .models import Cartridge
 import qrcode
 import io
 import base64
-from .models import RefillRecord, Cartridge
+from .models import RefillRecord, Cartridge, Status
 
 def refill_detail(request, refill_id):
     refill = get_object_or_404(RefillRecord, pk=refill_id)
@@ -26,7 +26,7 @@ def inrefills(request):
 
 
 def cartridge_list(request):
-    cartridges = Cartridge.objects.all()
+    cartridges = Cartridge.objects.order_by("date_added")
 
     # Генерация QR-кодов для каждого картриджа
     for cartridge in cartridges:
@@ -75,7 +75,23 @@ def cartridge_detail(request, cartridge_id):
     qr_code_image.save(buffer)
     cartridge.qr_code_data = base64.b64encode(buffer.getvalue()).decode()
 
+    last_refill = cartridge.refillrecord_set.order_by('-date_sent').first()
+    last_refill_date = last_refill.date_sent if last_refill else None
+
     context = {
         'cartridge': cartridge,
+        'last_refill_date': last_refill_date,
     }
     return render(request, 'cartridge_detail.html', context)
+
+
+
+def cartridge_confirm_refill(request, cartridge_id):
+    cartridge = get_object_or_404(Cartridge, pk=cartridge_id)
+
+    if request.method == 'POST':
+        cartridge.status = Status.REFILLED  # Assuming you have a Status.REFILLED value
+        cartridge.save()
+        return redirect('cartridge_detail', cartridge_id=cartridge_id)  # Redirect back to the detail page
+
+    return redirect('cartridge_list')  # Or redirect to another page
