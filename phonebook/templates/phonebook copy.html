@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block title %}Телефонная книга{% endblock %}
+
+{% block content %}
+
+<div class="pcoded-inner-content">
+    <div class="main-body">
+        <div class="page-wrapper">
+            <div class="page-body">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Телефонная книга</h5>
+                        <div class="card-header-right"> <ul class="list-unstyled card-option"> <li class="first-opt"><i class="feather icon-chevron-left open-card-option"></i></li> <li><i class="feather icon-maximize full-card"></i></li> <li><i class="feather icon-minus minimize-card"></i></li> <li><i class="feather icon-refresh-cw reload-card"></i></li> <li><i class="feather icon-trash close-card"></i></li> <li><i class="feather icon-chevron-left open-card-option"></i></li> </ul> </div>
+                    </div>
+                    <div class="card-block table-border-style">
+                        <div class="topnav">
+                            <input type="search" name="text" placeholder="Поиск..">
+                            <input type="submit" value="Найти">
+                          </div>
+                             </form>
+                        </div>
+                        <div class="table-responsive">
+                            {% for department in departments %}
+                            <table class=" table table-hover">
+                                <thead>
+                                    <tr class="table-primary">
+                                        <th colspan="8">
+                                            <h5>{{ department.get_name }}</h5>
+                                        </th>
+                                    </tr>
+                                    <tr class="table-secondary">
+                                        <th style="width: 15%">ФИО</th>
+                                        <th style="width: 20%">Должность</th>
+                                        <th style="width: 25%">Отдел</th>
+                                        <th style="width: 10%">Здание</th>
+                                        <th style="width: 5%">Кабинет</th>
+                                        <th style="width: 5%">SIP</th>
+                                        <th style="width: 5%">Телефон</th>
+                                        <th style="width: 10%">Емейл</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for items in phonebook %}
+                                        {% if items.department == department %}
+                                            <tr>
+                                                <td scope="row">{{ items.name }}</td>
+                                                <td>{{ items.job_title }}</td>
+                                                <td>{{ items.department.get_name }}</td>
+                                                <td>{{ items.get_bilding_display }}</td>
+                                                <td>{{ items.cabinet }}</td>
+                                                <td>{{ items.sip }}</td>
+                                                <td>{{ items.phone }}</td>
+                                                <td>{{ items.email }}</td>
+                                            </tr>
+                                        {% endif %}
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="styleSelector">
+    </div>
+</div>
+{% endblock %}
