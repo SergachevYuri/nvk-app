@@ -26,7 +26,7 @@ def inrefills(request):
 
 
 def cartridge_list(request):
-    cartridges = Cartridge.objects.all()
+    cartridges = Cartridge.objects.order_by("date_added")
 
     # Генерация QR-кодов для каждого картриджа
     for cartridge in cartridges:
