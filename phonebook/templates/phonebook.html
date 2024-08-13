@@ -4,22 +4,67 @@
 
 {% block content %}
 
-<button type="button" class="hamburger animated fadeInLeft is-closed" data-toggle="offcanvas">
-    <span class="hamb-top"></span>
-    <span class="hamb-middle"></span>
-    <span class="hamb-bottom"></span>
-</button>
-<div class="container">
-    <div class="row">
-        <div class="col-lg-8 col-lg-offset-2">
-            <h1>Fancy Toggle Sidebar Navigation</h1>
-            <p>Bacon ipsum dolor sit amet tri-tip shoulder tenderloin shankle. Bresaola tail pancetta ball tip doner meatloaf corned beef. Kevin pastrami tri-tip prosciutto ham hock pork belly bacon pork loin salami pork chop shank corned beef tenderloin meatball cow. Pork bresaola meatloaf tongue, landjaeger tail andouille strip steak tenderloin sausage chicken tri-tip. Pastrami tri-tip kielbasa sausage porchetta pig sirloin boudin rump meatball andouille chuck tenderloin biltong shank </p>
-            <p>Pig meatloaf bresaola, spare ribs venison short loin rump pork loin drumstick jowl meatball brisket. Landjaeger chicken fatback pork loin doner sirloin cow short ribs hamburger shoulder salami pastrami. Pork swine beef ribs t-bone flank filet mignon, ground round tongue. Tri-tip cow turducken shank beef shoulder bresaola tongue flank leberkas ball tip.</p>
-            <p>Filet mignon brisket pancetta fatback short ribs short loin prosciutto jowl turducken biltong kevin pork chop pork beef ribs bresaola. Tongue beef ribs pastrami boudin. Chicken bresaola kielbasa strip steak biltong. Corned beef pork loin cow pig short ribs boudin bacon pork belly chicken andouille. Filet mignon flank turkey tongue. Turkey ball tip kielbasa pastrami flank tri-tip t-bone kevin landjaeger capicola tail fatback pork loin beef jerky.</p>
-            <p>Chicken ham hock shankle, strip steak ground round meatball pork belly jowl pancetta sausage spare ribs. Pork loin cow salami pork belly. Tri-tip pork loin sausage jerky prosciutto t-bone bresaola frankfurter sirloin pork chop ribeye corned beef chuck. Short loin hamburger tenderloin, landjaeger venison porchetta strip steak turducken pancetta beef cow leberkas sausage beef ribs. Shoulder ham jerky kielbasa. Pig doner short loin pork chop. Short ribs frankfurter rump meatloaf.</p>
-            <p>Filet mignon biltong chuck pork belly, corned beef ground round ribeye short loin rump swine. Hamburger drumstick turkey, shank rump biltong pork loin jowl sausage chicken. Rump pork belly fatback ball tip swine doner pig. Salami jerky cow, boudin pork chop sausage tongue andouille turkey.</p>                         
+<div class="pcoded-inner-content">
+    <div class="main-body">
+        <div class="page-wrapper">
+            <div class="page-body">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Телефонная книга</h5>
+                        <div class="card-header-right"> <ul class="list-unstyled card-option"> <li class="first-opt"><i class="feather icon-chevron-left open-card-option"></i></li> <li><i class="feather icon-maximize full-card"></i></li> <li><i class="feather icon-minus minimize-card"></i></li> <li><i class="feather icon-refresh-cw reload-card"></i></li> <li><i class="feather icon-trash close-card"></i></li> <li><i class="feather icon-chevron-left open-card-option"></i></li> </ul> </div>
+                    </div>
+                    <div class="card-block table-border-style">
+                        <div class="topnav">
+                            <input type="search" name="text" placeholder="Поиск..">
+                            <input type="submit" value="Найти">
+                          </div>
+                             </form>
+                        </div>
+                        <div class="table-responsive">
+                            {% for department in departments %}
+                            <table class=" table table-hover">
+                                <thead>
+                                    <tr class="table-primary">
+                                        <th colspan="8">
+                                            <h5>{{ department.get_name }}</h5>
+                                        </th>
+                                    </tr>
+                                    <tr class="table-secondary">
+                                        <th style="width: 15%">ФИО</th>
+                                        <th style="width: 20%">Должность</th>
+                                        <th style="width: 25%">Отдел</th>
+                                        <th style="width: 10%">Здание</th>
+                                        <th style="width: 5%">Кабинет</th>
+                                        <th style="width: 5%">SIP</th>
+                                        <th style="width: 5%">Телефон</th>
+                                        <th style="width: 10%">Емейл</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for items in phonebook %}
+                                        {% if items.department == department %}
+                                            <tr>
+                                                <td scope="row">{{ items.name }}</td>
+                                                <td>{{ items.job_title }}</td>
+                                                <td>{{ items.department.get_name }}</td>
+                                                <td>{{ items.get_bilding_display }}</td>
+                                                <td>{{ items.cabinet }}</td>
+                                                <td>{{ items.sip }}</td>
+                                                <td>{{ items.phone }}</td>
+                                                <td>{{ items.email }}</td>
+                                            </tr>
+                                        {% endif %}
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-</div>
+    <div id="styleSelector">
+    </div>
 </div>
 {% endblock %}
