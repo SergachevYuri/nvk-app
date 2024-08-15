@@ -1,15 +1,15 @@
 <div class="border-end bg-white" id="sidebar-wrapper">
     <div class="sidebar-heading border-bottom bg-light">НВК «Саха»</div>
     <div class="list-group list-group-flush">
-        <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/">Главная</a>
-        <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#" data-bs-toggle="collapse" data-bs-target="#network-menu" aria-expanded="false" aria-controls="network-menu">
+        <a class="list-group-item list-group-item-action list-group-item-light p-3 {% if request.path == '/' %}active{% endif %}" href="/">Главная</a>
+        <a class="list-group-item list-group-item-action list-group-item-light p-3 {% if request.path == '/network' %}active{% endif %}" href="#" data-bs-toggle="collapse" data-bs-target="#network-menu" aria-expanded="false" aria-controls="network-menu">
             Сеть
         </a>
-        <div class="collapse" id="network-menu">
-                <a class="list-group-item list-group-item-action list-group-item-light p-3"  href="/network/switches/">Свитчи</a>
-                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/network/ip-addresses/">IP-адреса</a>
+        <div class="collapse {% if request.path|slice:8 == '/network' %}show{% endif %}" id="network-menu">
+                <a class="list-group-item list-group-item-action list-group-item-light p-3 {% if request.path == '/network/switches/' %}active{% endif %}"  href="/network/switches/">Свитчи</a>
+                <a class="list-group-item list-group-item-action list-group-item-light p-3 {% if request.path == '/network/ip-addresses/' %}active{% endif %}" href="/network/ip-addresses/">IP-адреса</a>
         </div>
-        <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/phonebook/">Телефонная книга</a>
-        <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/cartridges/">Картриджи</a>
+        <a class="list-group-item list-group-item-action list-group-item-light p-3 {% if request.path == '/phonebook/' %}active{% endif %}" href="/phonebook/">Телефонная книга</a>
+        <a class="list-group-item list-group-item-action list-group-item-light p-3 {% if request.path == '/cartridges/' %}active{% endif %}" href="/cartridges/">Картриджи</a>
     </div>
 </div>
