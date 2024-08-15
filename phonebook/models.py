@@ -9,7 +9,7 @@ class Phonebook(models.Model):
     class BUILDING(models.TextChoices):
         RK = 'RK', _('Редакторский Корпус')
         TD = 'TD', _('Теледом')
-        PV = 'PV', _('Павилион')
+        PV = 'PV', _('Павильон')
         PTVS = 'PTVS', _('ПТВС')
         GAR = 'GAR', _('Гараж')
 
