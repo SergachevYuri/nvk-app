@@ -44,7 +44,9 @@ INSTALLED_APPS = [
     "organization",
     "phonebook",
     "equipment",
-    "network"
+    "network",
+    "news"
+    
 ]
 
 MIDDLEWARE = [
