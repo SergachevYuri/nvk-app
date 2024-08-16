@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
+from django.conf import settings
 # Create your models here.
 
 class NewsCategory(models.Model):
@@ -34,7 +35,7 @@ class News(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.author:
-            self.author = User.objects.get(pk=1) # Assuming you have a default user with ID 1
+            self.author = User.objects.get(pk=settings.AUTH_USER_MODEL) # Assuming you have a default user with ID 1
         super(News, self).save(*args, **kwargs)
 
 
