@@ -27,11 +27,15 @@ class News(models.Model):
     content = models.TextField(default='', verbose_name="Содержание")
     category = models.ForeignKey(NewsCategory, on_delete=models.CASCADE, verbose_name="Категория")
     date_added = models.DateTimeField(default=timezone.now, verbose_name="Дата добавления")
-    author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Пользователь")
+    author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Пользователь", default=None, editable=False)
 
     def __str__(self):
         return self.title_name
 
+    def save(self, *args, **kwargs):
+        if not self.author:
+            self.author = User.objects.get(pk=1) # Assuming you have a default user with ID 1
+        super(News, self).save(*args, **kwargs)
 
 
     
