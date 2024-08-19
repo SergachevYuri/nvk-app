@@ -4,6 +4,9 @@ import qrcode
 import io
 import base64
 from .models import RefillRecord, Cartridge, Status
+from django.views.generic import ListView
+from .forms import CartridgeFilterForm
+
 
 def refill_detail(request, refill_id):
     refill = get_object_or_404(RefillRecord, pk=refill_id)
@@ -95,3 +98,25 @@ def cartridge_confirm_refill(request, cartridge_id):
         return redirect('cartridge_detail', cartridge_id=cartridge_id)  # Redirect back to the detail page
 
     return redirect('cartridge_list')  # Or redirect to another page
+
+class CartridgeListView(ListView):
+    model = Cartridge
+    template_name = "cartridge_list.html"
+    context_object_name = "cartridges"
+    paginate_by = 10
+    
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        # Фильтрация по статусу, если выбран в форме
+        status = self.request.GET.get('status')
+        if status:
+            queryset = queryset.filter(status=status)
+        # Сортировка
+        order_by = self.request.GET.get('order_by', 'date_added')  # Сортировка по умолчанию - по дате добавления
+        queryset = queryset.order_by(order_by)
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['filter_form'] = CartridgeFilterForm(self.request.GET)
+        return context

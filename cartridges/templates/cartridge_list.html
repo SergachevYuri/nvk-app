@@ -18,6 +18,22 @@
     </div>
 </div>
 
+<form method="get">
+    <div class="row">
+        <div class="col-md-4">
+            <label for="status">Статус:</label>
+            {{ filter_form.status }}
+        </div>
+        <div class="col-md-4">
+            <label for="order_by">Сортировать по:</label>
+            {{ filter_form.order_by }}
+        </div>
+        <div class="col-md-4">
+            <button type="submit" class="btn btn-primary">Применить фильтр</button>
+        </div>
+    </div>
+</form>
+
 <div class="pcoded-inner-content">
 
     <div class="main-body">
