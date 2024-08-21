@@ -20,7 +20,18 @@ def refills(request):
 
 def cartridges(request):
     cartridges = Cartridge.objects.all()
+
+    # Фильтрация по статусу
+    status = request.GET.get('status')
+    if status:
+        cartridges = cartridges.filter(status=status)
+
+    # Сортировка
+    order_by = request.GET.get('order_by', 'date_added')
+    cartridges = cartridges.order_by(order_by)
+
     return render(request, 'cartridge.html', {'cartridge': cartridges})
+
 
 
 def inrefills(request):

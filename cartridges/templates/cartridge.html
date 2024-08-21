@@ -3,7 +3,6 @@
 {% block title %}Список Картриджей{% endblock %}
 
 {% block content %}
-
 <div class="page-header card">
     <div class="row align-items-end">
         <div class="col-lg-8">
@@ -18,11 +17,35 @@
 </div>
 
 <div class="pcoded-inner-content">
-
     <div class="main-body">
         <div class="page-wrapper">
-
             <div class="page-body">
+
+                <!-- Форма для фильтрации и сортировки -->
+                <form method="get" class="mb-4">
+                    <div class="form-row">
+                        <div class="col">
+                            <select name="status" class="form-control">
+                                <option value="">Все статусы</option>
+                                <option value="RF" {% if request.GET.status == 'RF' %}selected{% endif %}>В ремонте</option>
+                                <option value="NEW" {% if request.GET.status == 'NEW' %}selected{% endif %}>Новый</option>
+                                <option value="USED" {% if request.GET.status == 'USED' %}selected{% endif %}>Использованный</option>
+                                <!-- Добавьте другие статусы по мере необходимости -->
+                            </select>
+                        </div>
+                        <div class="col">
+                            <select name="order_by" class="form-control">
+                                <option value="date_added" {% if request.GET.order_by == 'date_added' %}selected{% endif %}>Дата добавления</option>
+                                <option value="inventory_number" {% if request.GET.order_by == 'inventory_number' %}selected{% endif %}>Технический номер</option>
+                                <option value="manufacturer" {% if request.GET.order_by == 'manufacturer' %}selected{% endif %}>Производитель</option>
+                                <!-- Добавьте другие параметры сортировки по мере необходимости -->
+                            </select>
+                        </div>
+                        <div class="col">
+                            <button type="submit" class="btn btn-primary">Применить</button>
+                        </div>
+                    </div>
+                </form>
 
                 <div class="card">
                     <div class="card-block table-border-style">
@@ -53,11 +76,9 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
-
-    <div id="styleSelector">
-    </div>
 </div>
+
+<div id="styleSelector"></div>
 {% endblock %}
