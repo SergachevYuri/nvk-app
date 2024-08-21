@@ -27,9 +27,10 @@
                         <div class="col">
                             <select name="status" class="form-control">
                                 <option value="">Все статусы</option>
-                                <option value="RF" {% if request.GET.status == 'RF' %}selected{% endif %}>В ремонте</option>
-                                <option value="NEW" {% if request.GET.status == 'NEW' %}selected{% endif %}>Новый</option>
-                                <option value="USED" {% if request.GET.status == 'USED' %}selected{% endif %}>Использованный</option>
+                                <option value="RF" {% if request.GET.status == 'RF' %}selected{% endif %}>На заправке</option>
+                                <option value="RFD" {% if request.GET.status == 'RFD' %}selected{% endif %}>Заправленный</option>
+                                <option value="on-the-job" {% if request.GET.status == 'on-the-job' %}selected{% endif %}>В работе</option>
+                                <option value="WAIT" {% if request.GET.status == 'WAIT' %}selected{% endif %}>Ожидание заправки</option>
                                 <!-- Добавьте другие статусы по мере необходимости -->
                             </select>
                         </div>
