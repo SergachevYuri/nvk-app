@@ -19,7 +19,7 @@ class Cartridge(models.Model):
     inventory_number = models.CharField(max_length=100, unique=True, verbose_name="Инвертизационный номер")
     manufacturer = models.CharField(max_length=100, verbose_name="Производитель")
     model = models.CharField(max_length=100, verbose_name="Модель")
-    status = models.CharField(max_length=2, choices=Status.choices, default=Status.AWAITING_REFILL, verbose_name="Статус")
+    status = models.CharField(max_length=10, choices=Status.choices, default=Status.WAITING_FOR_REFILL, verbose_name="Статус")
     date_added = models.DateTimeField(default=timezone.now, verbose_name="Дата добавления")
     status_updated = models.DateTimeField(auto_now=True, verbose_name="Время обновления статуса")
 
