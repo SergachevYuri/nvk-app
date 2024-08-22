@@ -7,7 +7,6 @@ class Status(models.TextChoices):
     WAITING_FOR_REFILL = 'WAIT', _('Ожидание заправки')
     REFILLING = 'RF', _('На заправке')
     CHECKING = 'CH', _('На проверке')
-    REFILLED = 'RFD', _('Заправленный')
     ON_THE_JOB = 'OTJ', _('В работе')
 
 class Cartridge(models.Model):
