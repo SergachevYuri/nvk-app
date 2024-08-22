@@ -3,12 +3,12 @@ from django.utils.translation import gettext_lazy as _
 from django.utils import timezone
 
 class Status(models.TextChoices):
-    NEW = 'NW', _('Новый')
-    AWAITING_REFILL = 'AW', _('Ожидание заправки')
+    REFILLED = 'RFD', _('Заправленный')
+    WAITING_FOR_REFILL = 'WAIT', _('Ожидание заправки')
     REFILLING = 'RF', _('На заправке')
     CHECKING = 'CH', _('На проверке')
-    REFILLED = 'RD', _('Заправленный')
-    IN_USE = 'IU', _('В работе')
+    REFILLED = 'RFD', _('Заправленный')
+    ON_THE_JOB = 'OTJ', _('В работе')
 
 class Cartridge(models.Model):
     class Meta:
