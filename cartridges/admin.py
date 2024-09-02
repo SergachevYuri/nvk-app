@@ -36,7 +36,7 @@ class CartridgeAdmin(admin.ModelAdmin):
 
     def get_form(self, request, obj=None, **kwargs):
         form = super(CartridgeAdmin, self).get_form(request, obj, **kwargs)
-        if obj and obj.status in [Status.REFILLED, Status.IN_USE]:  # Проверяем статус объекта
+        if obj and obj.status in [Status.REFILLED, Status.ON_THE_JOB]:  # Проверяем статус объекта
             form.base_fields['page_count'].required = True  # Делаем поле ОБЯЗАТЕЛЬНЫМ  
         else:
             form.base_fields.pop('page_count', None)  # Удаляем поле из формы, если статус не подходит
@@ -61,11 +61,11 @@ class RefillRecordForm(forms.ModelForm):
         # Получаем уже выбранные картриджи, если они есть
         if self.instance.pk:
             self.fields['cartridges'].queryset = Cartridge.objects.filter(
-                models.Q(status=Status.AWAITING_REFILL) | 
+                models.Q(status=Status.WAITING_FOR_REFILL) | 
                 models.Q(refillrecord=self.instance)  # Добавляем картриджи, уже выбранные для этой заправки
             )
         else:
-            self.fields['cartridges'].queryset = Cartridge.objects.filter(status=Status.AWAITING_REFILL)
+            self.fields['cartridges'].queryset = Cartridge.objects.filter(status=Status.WAITING_FOR_REFILL)
 
         # Добавляем поле для даты возврата с заправки
         self.fields['date_returned'] = forms.DateTimeField(
