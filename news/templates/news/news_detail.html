@@ -1,14 +1,17 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>{{ news_item.title_name }}</title>
-    </head>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ news_item.title_name }}</title>
+</head>
 <body>
-    <h1>{{ news_item.title_name }}</h1>
-    <p>{{ news_item.date_added }}</p>
-    <p>{{ news_item.content }}</p>
-    <p>Category: {{ news_item.category.name }}</p>
-    <p>Author: {{ news_item.author.username }}</p>
-    <a href="{% url 'news_list' %}">Back to news list</a>
+    <h1>{{ news_item.title_name }}</h1> <!-- Заголовок новости -->
+    <p><strong>Категория:</strong> {{ news_item.category.name }}</p> <!-- Категория новости -->
+    <p><strong>Описание:</strong> {{ news_item.describtion }}</p> <!-- Описание новости -->
+    <p><strong>Содержание:</strong> {{ news_item.content }}</p> <!-- Содержание новости -->
+    <p><strong>Автор:</strong> {{ news_item.author.username }}</p> <!-- Автор новости -->
+    <p><strong>Дата добавления:</strong> {{ news_item.date_added }}</p> <!-- Дата добавления -->
+    <a href="{% url 'news_list' %}">Back to news list</a> <!-- Ссылка обратно к списку новостей -->
 </body>
 </html>
