@@ -26,4 +26,5 @@ urlpatterns = [
     path("cartridges/", include('cartridges.urls')),
     path("phonebook/", include('phonebook.urls')),
     path("network/", include('network.urls')),
+    path('news/', include('news.urls')),
 ]
