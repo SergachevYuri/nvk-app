@@ -28,7 +28,7 @@ class Cartridge(models.Model):
     
     def update_status(self, new_status, page_count=None):
         # Логика обновления статуса...
-        if new_status == Status.AWAITING_REFILL:
+        if new_status == Status.WAITING_FOR_REFILL:
             if page_count is not None:
                 # Пытаемся найти последнюю запись PrintRecord без end_page_count
                 last_record = self.printrecord_set.filter(end_page_count__isnull=True, cartridge_id=self.id).last()
@@ -39,7 +39,7 @@ class Cartridge(models.Model):
                 else:
                     # Если подходящая запись не найдена, создаём новую
                     PrintRecord.objects.create(cartridge=self, start_page_count=page_count)
-        elif new_status == Status.IN_USE:
+        elif new_status == Status.ON_THE_JOB:
             if page_count is not None:
                 # Создание новой записи при установке картриджа в принтер
                 PrintRecord.objects.create(cartridge=self, start_page_count=page_count, end_page_count=None)
