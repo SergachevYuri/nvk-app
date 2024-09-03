@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{{ news_item.title_name }}</title>
+    </head>
+<body>
+    <h1>{{ news_item.title_name }}</h1>
+    <p>{{ news_item.date_added }}</p>
+    <p>{{ news_item.content }}</p>
+    <p>Category: {{ news_item.category.name }}</p>
+    <p>Author: {{ news_item.author.username }}</p>
+    <a href="{% url 'news_list' %}">Back to news list</a>
+</body>
+</html>
