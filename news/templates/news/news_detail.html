@@ -1,17 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ news_item.title_name }}</title>
-</head>
-<body>
+{% extends "base.html" %}
+
+{% block title %}{{ news_item.title_name }}{% endblock %}
+
+{% block content %}
     <h1>{{ news_item.title_name }}</h1> <!-- Заголовок новости -->
     <p><strong>Категория:</strong> {{ news_item.category.name }}</p> <!-- Категория новости -->
     <p><strong>Описание:</strong> {{ news_item.describtion }}</p> <!-- Описание новости -->
     <p><strong>Содержание:</strong> {{ news_item.content }}</p> <!-- Содержание новости -->
     <p><strong>Автор:</strong> {{ news_item.author.username }}</p> <!-- Автор новости -->
     <p><strong>Дата добавления:</strong> {{ news_item.date_added }}</p> <!-- Дата добавления -->
-    <a href="{% url 'news_list' %}">Back to news list</a> <!-- Ссылка обратно к списку новостей -->
-</body>
-</html>
+    <a href="{% url 'news_list' %}">Назад к списку новостей</a> <!-- Ссылка обратно к списку новостей -->
+{% endblock %}
