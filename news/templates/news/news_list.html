@@ -1,17 +1,17 @@
-{% extends "base.html" %}
-
-{% block title %}News List{% endblock %}
+{% extends 'base.html' %}
 
 {% block content %}
-    <h1>News List</h1>
-    <ul>
+<div class="container mt-5">
+    <h1 class="mb-4">News List</h1>
+    <div class="list-group">
         {% for news_item in news %}
-            <li>
-                <h2><a href="{% url 'news_detail' pk=news_item.pk %}">{{ news_item.title_name }}</a></h2> <!-- Заголовок с ссылкой на детальную страницу -->
-                <p><strong>Категория:</strong> {{ news_item.category.name }}</p> <!-- Категория новости -->
-                <p><strong>Описание:</strong> {{ news_item.describtion }}</p> <!-- Описание новости -->
-                <p><strong>Дата добавления:</strong> {{ news_item.date_added }}</p> <!-- Дата добавления -->
-            </li>
+            <a href="{% url 'news_detail' pk=news_item.pk %}" class="list-group-item list-group-item-action">
+                <h2>{{ news_item.title_name }}</h2>
+                <p><strong>Категория:</strong> {{ news_item.category.name }}</p>
+                <p><strong>Описание:</strong> {{ news_item.describtion }}</p>
+                <p><strong>Дата добавления:</strong> {{ news_item.date_added }}</p>
+            </a>
         {% endfor %}
-    </ul>
+    </div>
+</div>
 {% endblock %}

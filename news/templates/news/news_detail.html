@@ -1,13 +1,17 @@
-{% extends "base.html" %}
-
-{% block title %}{{ news_item.title_name }}{% endblock %}
+{% extends 'base.html' %}
 
 {% block content %}
-    <h1>{{ news_item.title_name }}</h1> <!-- Заголовок новости -->
-    <p><strong>Категория:</strong> {{ news_item.category.name }}</p> <!-- Категория новости -->
-    <p><strong>Описание:</strong> {{ news_item.describtion }}</p> <!-- Описание новости -->
-    <p><strong>Содержание:</strong> {{ news_item.content }}</p> <!-- Содержание новости -->
-    <p><strong>Автор:</strong> {{ news_item.author.username }}</p> <!-- Автор новости -->
-    <p><strong>Дата добавления:</strong> {{ news_item.date_added }}</p> <!-- Дата добавления -->
-    <a href="{% url 'news_list' %}">Назад к списку новостей</a> <!-- Ссылка обратно к списку новостей -->
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-body">
+            <h1 class="card-title">{{ news_item.title_name }}</h1> <!-- Заголовок новости -->
+            <p class="card-subtitle mb-2 text-muted"><strong>Категория:</strong> {{ news_item.category.name }}</p> <!-- Категория новости -->
+            <p class="card-text"><strong>Описание:</strong> {{ news_item.describtion }}</p> <!-- Описание новости -->
+            <p class="card-text">{{ news_item.content }}</p> <!-- Содержание новости -->
+            <p><strong>Автор:</strong> {{ news_item.author.username }}</p> <!-- Автор новости -->
+            <p><strong>Дата добавления:</strong> {{ news_item.date_added }}</p> <!-- Дата добавления -->
+            <a href="{% url 'news_list' %}" class="btn btn-primary">Back to news list</a> <!-- Ссылка обратно к списку новостей -->
+        </div>
+    </div>
+</div>
 {% endblock %}
